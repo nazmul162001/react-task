@@ -27,7 +27,7 @@ All this task must be done in 1 day
 https://reacttask.mkdlabs.com/v2/api/lambda/login
 Method POST
 content-type application/json
-x-project cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==
+x-project cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==
 body
 {
   "email": "adminreacttask@manaknight.com",
@@ -51,7 +51,7 @@ Check if token still valid
 https://reacttask.mkdlabs.com/v2/api/lambda/check
 Method POST
 Header
-x-project cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==
+x-project cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==
 Bearer <token>
 body
 {
@@ -67,7 +67,7 @@ http code 200
 https://reacttask.mkdlabs.com/v1/api/rest/video/PAGINATE
 Method POST
 Header
-x-project cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==
+x-project cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==
 Bearer <token>
 body
 {
