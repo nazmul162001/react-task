@@ -1,3 +1,5 @@
+# This project is a toy project for training and quality assurance purposes
+
 # Task
 
 All this task must be done in 1 day
