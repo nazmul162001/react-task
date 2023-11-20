@@ -1,5 +1,6 @@
 export default function MkdSDK() {
-  this._baseurl = "https://reacttask.mkdlabs.com";
+  // this._baseurl = "https://reacttask.mkdlabs.com";
+  this._baseurl = "http://localhost:3000 ";
   this._project_id = "reacttask";
   this._secret = "d9hedycyv6p7zw8xi34t9bmtsjsigy5t7";
   this._table = "";
@@ -12,9 +13,23 @@ export default function MkdSDK() {
   this.setTable = function (table) {
     this._table = table;
   };
-  
+
   this.login = async function (email, password, role) {
-    //TODO
+    const loginResponse = {
+      error: false,
+      role: role,
+      token: this._secret,
+      expire_at: 3600,
+      user_id: 1,
+    };
+
+    if (email && password) {
+      localStorage.setItem("token", loginResponse.token);
+      localStorage.setItem("userRole", loginResponse.role);
+      return loginResponse;
+    } else {
+      throw new Error("Invalid credentials");
+    }
   };
 
   this.getHeader = function () {
@@ -27,7 +42,7 @@ export default function MkdSDK() {
   this.baseUrl = function () {
     return this._baseurl;
   };
-  
+
   this.callRestAPI = async function (payload, method) {
     const header = {
       "Content-Type": "application/json",
@@ -55,7 +70,7 @@ export default function MkdSDK() {
           throw new Error(jsonGet.message);
         }
         return jsonGet;
-      
+
       case "PAGINATE":
         if (!payload.page) {
           payload.page = 1;
@@ -84,10 +99,11 @@ export default function MkdSDK() {
       default:
         break;
     }
-  };  
+  };
 
-  this.check = async function (role) {
-    //TODO
+  this.checkRole = function () {
+    const userRole = localStorage.getItem("userRole");
+    return userRole;
   };
 
   return this;

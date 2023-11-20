@@ -4,7 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../authContext";
+// import { AuthContext } from "../authContext";
+import SnackBar from "../components/SnackBar";
+import { GlobalContext } from "../globalContext";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -14,7 +16,8 @@ const AdminLoginPage = () => {
     })
     .required();
 
-  const { dispatch } = React.useContext(AuthContext);
+  const { dispatch } = React.useContext(GlobalContext);
+
   const navigate = useNavigate();
   const {
     register,
@@ -26,8 +29,26 @@ const AdminLoginPage = () => {
   });
 
   const onSubmit = async (data) => {
-    let sdk = new MkdSDK();
-    //TODO
+    try {
+      const sdk = new MkdSDK();
+      const response = await sdk.login(data.email, data.password, "admin");
+      const isAdmin = sdk.checkRole();
+
+      // console.log(isAdmin);
+
+      if (response && response.token && isAdmin === "admin") {
+        dispatch({
+          type: "SNACKBAR",
+          payload: { message: "Login successful" },
+        });
+        navigate("/admin/dashboard");
+        console.log(response);
+      } else {
+        throw new Error("Invalid response from the server");
+      }
+    } catch (error) {
+      console.error("Login failed:", error.message);
+    }
   };
 
   return (
@@ -43,6 +64,7 @@ const AdminLoginPage = () => {
           >
             Email
           </label>
+          <SnackBar />
           <input
             type="email"
             placeholder="Email"
