@@ -5,8 +5,10 @@ import SnackBar from "./components/SnackBar";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ProtectedAdminDashboard from "./pages/AdminDashboardPage";
 
 function renderRoutes(role) {
+  const token = localStorage.getItem("token");
   switch (role) {
     case "admin":
       return (
@@ -22,7 +24,21 @@ function renderRoutes(role) {
       return (
         <Routes>
           <Route exact path="/admin/login" element={<AdminLoginPage />}></Route>
-          <Route exact path="/admin/dashboard" element={<AdminDashboardPage />}></Route>
+          {token ? (
+            role === "admin" ? (
+              <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+            ) : (
+              <Route
+                path="/admin/dashboard"
+                element={<ProtectedAdminDashboard />}
+              />
+            )
+          ) : (
+            <Route
+              path="/admin/dashboard"
+              element={<Navigate to="/admin/login" />}
+            />
+          )}
           <Route path="*" exact element={<NotFoundPage />}></Route>
         </Routes>
       );

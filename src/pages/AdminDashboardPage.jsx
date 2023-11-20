@@ -1,15 +1,26 @@
 import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import VideoCard from "../components/VideoCard";
+import { useNavigate } from "react-router";
 
 const AdminDashboardPage = () => {
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    navigate("/admin/login");
+  };
+
   return (
     <>
       <section className="w-full bg-[#111111] h-screen text-white py-10 px-5 md:px-10">
         {/* logo & logout  */}
         <div className="flex justify-between items-center px-5">
           <h1 className="text-3xl font-bold">APP</h1>
-          <button className="flex items-center gap-2 text-sm px-5 py-1 text-black rounded-full bg-[#9BFF00]">
+          <button
+            onClick={handleLogOut}
+            className="flex items-center gap-2 text-sm px-5 py-1 text-black rounded-full bg-[#9BFF00]"
+          >
             <span className="">
               <FaRegUser />
             </span>
@@ -41,4 +52,15 @@ const AdminDashboardPage = () => {
   );
 };
 
-export default AdminDashboardPage;
+const ProtectedAdminDashboard = () => {
+  const token = localStorage.getItem("token");
+
+  // Check if token exists in localStorage
+  if (!token) {
+    return <Redirect to="/login" />;
+  }
+
+  return <AdminDashboardPage />;
+};
+
+export default ProtectedAdminDashboard;

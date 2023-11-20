@@ -24,29 +24,9 @@ const VideoCard = () => {
       author: "Author 3",
     },
   ]);
-  //   const items = [
-  //     {
-  //       id: "1",
-  //       name: "Video 1",
-  //       title: "Title 1",
-  //       author: "Author 1",
-  //     },
-  //     {
-  //       id: "2",
-  //       name: "Video 2",
-  //       title: "Title 2",
-  //       author: "Author 2",
-  //     },
-  //     {
-  //       id: "3",
-  //       name: "Video 3",
-  //       title: "Title 3",
-  //       author: "Author 3",
-  //     },
-  //   ];
 
   const [hoverIndex, setHoverIndex] = useState(null);
-  
+
   const moveCard = (dragIndex, dropIndex) => {
     if (dragIndex === dropIndex) return;
     const draggedItem = items[dragIndex];

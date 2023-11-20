@@ -36,7 +36,7 @@ const AdminLoginPage = () => {
 
       // console.log(isAdmin);
 
-      if (response && response.token && isAdmin === "admin") {
+      if (response && response.token) {
         dispatch({
           type: "SNACKBAR",
           payload: { message: "Login successful" },
