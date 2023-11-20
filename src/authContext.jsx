@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import MkdSDK from "./utils/MkdSDK";
 
 export const AuthContext = React.createContext();
@@ -13,7 +13,13 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      //TODO
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+        token: action.payload.token,
+        role: action.payload.role,
+      };
       return {
         ...state,
       };
@@ -44,9 +50,53 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  React.useEffect(() => {
-    //TODO
+  useEffect(() => {
+    // Check localStorage for an authenticated user and token
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    const role = localStorage.getItem("role");
+
+    if (token && user && role) {
+      // Dispatch a login success action if credentials are found
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          user,
+          token,
+          role,
+        },
+      });
+    }
   }, []);
+
+  const login = async (email, password, role) => {
+    try {
+      const response = await sdk.login(email, password, role);
+      if (response && response.token) {
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("user", email);
+        localStorage.setItem("role", role);
+        
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: {
+            user: email,
+            token: response.token,
+            role,
+          },
+        });
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error("Login failed:", error.message);
+      return false;
+    }
+  };
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
 
   return (
     <AuthContext.Provider

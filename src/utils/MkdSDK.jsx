@@ -25,7 +25,7 @@ export default function MkdSDK() {
 
     if (email && password) {
       localStorage.setItem("token", loginResponse.token);
-      localStorage.setItem("userRole", loginResponse.role);
+      localStorage.setItem("role", loginResponse.role);
       return loginResponse;
     } else {
       throw new Error("Invalid credentials");
@@ -102,8 +102,8 @@ export default function MkdSDK() {
   };
 
   this.checkRole = function () {
-    const userRole = localStorage.getItem("userRole");
-    return userRole;
+    const role = localStorage.getItem("role");
+    return role;
   };
 
   return this;
