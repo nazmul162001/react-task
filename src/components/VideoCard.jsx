@@ -11,93 +11,93 @@ const VideoCard = () => {
   const [allItems, setAllItems] = useState([
     {
       id: "1",
-      name: "Video 1",
-      title: "Title 1",
-      author: "Author 1",
+      name: "Cryptocurrency Explained: The Future of Money",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "John Smith",
     },
     {
       id: "2",
-      name: "Video 2",
-      title: "Title 2",
-      author: "Author 2",
+      name: "Mastering Algorithms: The Key to Efficient Programming",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Emily Johnson",
     },
     {
       id: "3",
-      name: "Video 3",
-      title: "Title 3",
-      author: "Author 3",
+      name: "The Evolution of AI in Modern Technology",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Michael Williams",
     },
     {
       id: "4",
-      name: "Video 4",
-      title: "Title 4",
-      author: "Author 4",
+      name: "Data Privacy: Navigating the Digital Age",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Olivia Brown",
     },
     {
       id: "5",
-      name: "Video 5",
-      title: "Title 5",
-      author: "Author 5",
+      name: "Future of Transportation: From Hyperloop to Flying Cars",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Daniel Martinez",
     },
     {
       id: "6",
-      name: "Video 6",
-      title: "Title 6",
-      author: "Author 6",
+      name: "Sustainable Energy: Innovations and Challenges",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Sophia Garcia",
     },
     {
       id: "7",
-      name: "Video 7",
-      title: "Title 7",
-      author: "Author 7",
+      name: "Space Exploration: Journey Beyond Our Solar System",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Liam Wilson",
     },
     {
       id: "8",
-      name: "Video 8",
-      title: "Title 8",
-      author: "Author 8",
+      name: "Artificial Intelligence in Healthcare: Revolutionizing Medicine",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Ava Anderson",
     },
     {
       id: "9",
-      name: "Video 9",
-      title: "Title 9",
-      author: "Author 9",
+      name: "Blockchain Technology: Beyond Bitcoin",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Noah Taylor",
     },
     {
       id: "10",
-      name: "Video 10",
-      title: "Title 10",
-      author: "Author 10",
+      name: "Future of Work: Adapting to Remote Employment",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Isabella Clark",
     },
     {
       id: "11",
-      name: "Video 11",
-      title: "Title 11",
-      author: "Author 11",
+      name: "Cybersecurity: Protecting Your Digital Life",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "William Rodriguez",
     },
     {
       id: "12",
-      name: "Video 12",
-      title: "Title 12",
-      author: "Author 12",
+      name: "Virtual Reality: Changing How We Experience Entertainment",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Sophie Moore",
     },
     {
       id: "13",
-      name: "Video 13",
-      title: "Title 13",
-      author: "Author 13",
+      name: "The Ethics of Biotechnology: Balancing Innovation and Responsibility",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Ethan Thompson",
     },
     {
       id: "14",
-      name: "Video 14",
-      title: "Title 14",
-      author: "Author 14",
+      name: "Gaming Industry Trends: From eSports to Game Streaming",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Avery Lee",
     },
     {
       id: "15",
-      name: "Video 15",
-      title: "Title 15",
-      author: "Author 15",
+      name: "Augmented Reality: Enhancing the Real World with Technology",
+      like: Math.floor(Math.random() * 50) + 50,
+      author: "Charlotte Hill",
     },
   ]);
 
@@ -129,6 +129,11 @@ const VideoCard = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <section className="px-5">
+        <div className="flex justify-between px-5 text-gray-400 py-5">
+          <span>like</span>
+          <span>Author</span>
+          <span>Most Liked</span>
+        </div>
         {currentItems.map((item, index) => (
           <Card
             key={item.id}
