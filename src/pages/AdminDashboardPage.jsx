@@ -13,7 +13,7 @@ const AdminDashboardPage = () => {
 
   return (
     <>
-      <section className="w-full bg-[#111111] h-screen text-white py-10 px-5 md:px-10">
+      <section className="w-full bg-[#111111] text-white py-10 px-5 md:px-10">
         {/* logo & logout  */}
         <div className="flex justify-between items-center px-5">
           <h1 className="text-3xl font-bold">APP</h1>
