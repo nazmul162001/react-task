@@ -8,7 +8,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 const VideoCard = () => {
   const [page, setPage] = useState(1);
 
-  const allItems = [
+  const [allItems, setAllItems] = useState([
     {
       id: "1",
       name: "Video 1",
@@ -99,7 +99,7 @@ const VideoCard = () => {
       title: "Title 15",
       author: "Author 15",
     },
-  ];
+  ]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -115,7 +115,7 @@ const VideoCard = () => {
     const newItems = [...allItems];
     newItems.splice(dragIndex, 1);
     newItems.splice(dropIndex, 0, draggedItem);
-    // Update state or perform any actions with the rearranged items
+    setAllItems(newItems);
   };
 
   const handleNextPage = () => {
