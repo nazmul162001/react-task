@@ -1,6 +1,6 @@
 export default function MkdSDK() {
-  // this._baseurl = "https://reacttask.mkdlabs.com";
-  this._baseurl = "http://localhost:3000 ";
+  this._baseurl = "https://reacttask.mkdlabs.com";
+  // this._baseurl = "http://localhost:3000 ";
   this._project_id = "reacttask";
   this._secret = "d9hedycyv6p7zw8xi34t9bmtsjsigy5t7";
   this._table = "";
@@ -15,20 +15,38 @@ export default function MkdSDK() {
   };
 
   this.login = async function (email, password, role) {
-    const loginResponse = {
-      error: false,
-      role: role,
-      token: this._secret,
-      expire_at: 3600,
-      user_id: 1,
-    };
+    try {
+      const response = await fetch(
+        "https://reacttask.mkdlabs.com/v2/api/lambda/login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password,
+            role,
+          }),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+            "x-project":
+              "cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==",
+          },
+        }
+      );
 
-    if (email && password) {
-      localStorage.setItem("token", loginResponse.token);
-      localStorage.setItem("role", loginResponse.role);
-      return loginResponse;
-    } else {
-      throw new Error("Invalid credentials");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+      // If login is successful, store the token in localStorage
+      if (responseData.token) {
+        localStorage.setItem("token", responseData.token);
+      }
+
+      return responseData;
+      // console.log(responseData);
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   };
 

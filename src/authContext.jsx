@@ -103,6 +103,7 @@ const AuthProvider = ({ children }) => {
       value={{
         state,
         dispatch,
+        login
       }}
     >
       {children}

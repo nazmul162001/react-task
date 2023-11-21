@@ -6,8 +6,6 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 
 const VideoCard = () => {
-  const [page, setPage] = useState(1);
-
   const [allItems, setAllItems] = useState([
     {
       id: "1",
@@ -100,6 +98,8 @@ const VideoCard = () => {
       author: "Charlotte Hill",
     },
   ]);
+  
+  const [page, setPage] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -125,6 +125,42 @@ const VideoCard = () => {
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : 1));
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // const token = localStorage.getItem("token");
+      try {
+        const token = "d9hedycyv6p7zw8xi34t9bmtsjsigy5t7";
+        // console.log(token);
+        const response = await fetch(
+          "https://reacttask.mkdlabs.com/v1/api/rest/video/PAGINATE",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              payload: {},
+              page: currentPage,
+              limit: itemsPerPage,
+            }),
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setAllItems(data.list);
+          console.log(data.list); // Log the fetched video data
+        } else {
+          throw new Error("Failed to fetch");
+        }
+      } catch (error) {
+        console.error("Error fetching video data:", error);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, itemsPerPage]);
 
   return (
     <DndProvider backend={HTML5Backend}>

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import { AuthContext } from "../authContext";
 import SnackBar from "../components/SnackBar";
 import { GlobalContext } from "../globalContext";
+import { AuthContext } from "../authContext";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -28,15 +29,14 @@ const AdminLoginPage = () => {
     resolver: yupResolver(schema),
   });
 
+  const { login } = React.useContext(AuthContext);
+
   const onSubmit = async (data) => {
     try {
-      const sdk = new MkdSDK();
-      const response = await sdk.login(data.email, data.password, "admin");
-      const isAdmin = sdk.checkRole();
+      const response = await login(data.email, data.password, "admin");
+      // console.log(response);
 
-      // console.log(isAdmin);
-
-      if (response && response.token && isAdmin === "admin") {
+      if (response) {
         dispatch({
           type: "SNACKBAR",
           payload: { message: "Login successful" },
