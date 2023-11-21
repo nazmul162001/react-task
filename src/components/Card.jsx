@@ -4,6 +4,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { FaArrowUpLong } from "react-icons/fa6";
 
 const Card = ({ videoInfo, index, moveCard, setHoverIndex }) => {
+  // console.log(videoInfo);
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "videoInfo",
     item: { id: videoInfo?.id, index },
@@ -38,12 +40,12 @@ const Card = ({ videoInfo, index, moveCard, setHoverIndex }) => {
           <div className="">
             <img
               className="w-20 h-12 rounded-lg"
-              src="https://t4.ftcdn.net/jpg/03/17/25/45/360_F_317254576_lKDALRrvGoBr7gQSa1k4kJBx7O2D15dc.jpg"
+              src={videoInfo?.photo}
               alt="video/image"
             />
           </div>
           <div className="text-gray-400 font-medium text-lg pr-5">
-            <p>{videoInfo?.name}</p>
+            <p>{videoInfo?.title}</p>
           </div>
         </div>
         <div className="flex items-center w-full">
@@ -51,11 +53,11 @@ const Card = ({ videoInfo, index, moveCard, setHoverIndex }) => {
             <span>
               <FaRegCircleUser className="text-xl" fil={undefined} />
             </span>
-            <span className="text-[#DBFD51]">{videoInfo.author}</span>
+            <span className="text-[#DBFD51]">{videoInfo.username}</span>
           </div>
         </div>
         <div className="flex items-center gap-2 ">
-          <span>{videoInfo.like}</span>
+          <span>{videoInfo?.like}</span>
           <span>
             <FaArrowUpLong className="text-[#DBFD51]" fil={undefined} />
           </span>

@@ -76,7 +76,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem("token", response.token);
         localStorage.setItem("user", email);
         localStorage.setItem("role", role);
-        
+
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: {
@@ -103,7 +103,8 @@ const AuthProvider = ({ children }) => {
       value={{
         state,
         dispatch,
-        login
+        login,
+        logout,
       }}
     >
       {children}

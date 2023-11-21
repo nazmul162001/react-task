@@ -98,7 +98,7 @@ const VideoCard = () => {
       author: "Charlotte Hill",
     },
   ]);
-  
+
   const [page, setPage] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -130,7 +130,7 @@ const VideoCard = () => {
     const fetchData = async () => {
       // const token = localStorage.getItem("token");
       try {
-        const token = "d9hedycyv6p7zw8xi34t9bmtsjsigy5t7";
+        const token = localStorage.getItem("token");
         // console.log(token);
         const response = await fetch(
           "https://reacttask.mkdlabs.com/v1/api/rest/video/PAGINATE",
@@ -138,6 +138,8 @@ const VideoCard = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "x-project":
+                "cmVhY3R0YXNrOmQ5aGVkeWN5djZwN3p3OHhpMzR0OWJtdHNqc2lneTV0Nw==",
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
@@ -150,7 +152,7 @@ const VideoCard = () => {
         if (response.ok) {
           const data = await response.json();
           setAllItems(data.list);
-          console.log(data.list); // Log the fetched video data
+          // console.log(data.list); // Log the fetched video data
         } else {
           throw new Error("Failed to fetch");
         }
