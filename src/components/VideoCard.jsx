@@ -63,7 +63,6 @@ const VideoCard = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setAllItems(data.list);
           setAllItems((prevItems) => [...prevItems, ...data.list]);
 
           // console.log(data.list); // Log the fetched video data
